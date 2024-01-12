@@ -1,0 +1,21 @@
+{
+  "root": "golang",
+  "sourceRoot": "golang",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go build -o=../dist/golang/app .",
+        "cwd": "golang"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "go run .",
+        "cwd": "golang"
+      }
+    }
+  }
+}
