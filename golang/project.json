@@ -6,14 +6,14 @@
     "build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "go build -o=../dist/golang/app .",
+        "command": "GOOS=js GOARCH=wasm go build -o=../dist/golang/app.wasm main.go",
         "cwd": "golang"
       }
     },
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "go run .",
+        "command": "go run main.go",
         "cwd": "golang"
       }
     }

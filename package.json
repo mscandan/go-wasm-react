@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build:all": "nx run-many --target=build",
+    "build:all": "npm run build:golang && nx build frontend",
     "build:fe": "nx build frontend",
-    "build:golang": "nx build golang"
+    "build:golang": "nx build golang && cp dist/golang/app.wasm frontend/public/"
   },
   "private": true,
   "devDependencies": {
