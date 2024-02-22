@@ -5,7 +5,8 @@
   "scripts": {
     "build:all": "npm run build:golang && nx build frontend",
     "build:fe": "nx build frontend",
-    "build:golang": "nx build golang && cp dist/golang/app.wasm frontend/public/"
+    "build:golang": "nx build golang && cp dist/golang/app.wasm frontend/public/",
+    "serve:fe": "npm run build:golang && nx serve frontend"
   },
   "private": true,
   "devDependencies": {

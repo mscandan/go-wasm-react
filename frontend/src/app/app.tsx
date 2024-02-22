@@ -1,4 +1,18 @@
+import { useEffect } from 'react';
+import useApi from './hooks/useApi';
+
 export function App() {
+  const { data, isLoading, refetch } = useApi(
+    'https://api.quotable.io/quotes/random'
+  );
+
+  console.log({ data, isLoading });
+
+  useEffect(() => {
+    console.log('from the page');
+    refetch();
+  }, [refetch]);
+
   return (
     <div
       style={{
@@ -7,15 +21,11 @@ export function App() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column',
       }}
     >
-      <button
-        onClick={() => {
-          alert(window.myGolangFunction(2, 3));
-        }}
-      >
-        Click here to invoke WebAssembly!
-      </button>
+      <button onClick={refetch}>Click here to invoke WebAssembly!</button>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }
