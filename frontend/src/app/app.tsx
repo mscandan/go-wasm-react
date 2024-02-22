@@ -1,17 +1,7 @@
-import { useEffect } from 'react';
 import useApi from './hooks/useApi';
 
 export function App() {
-  const { data, isLoading, refetch } = useApi(
-    'https://api.quotable.io/quotes/random'
-  );
-
-  console.log({ data, isLoading });
-
-  useEffect(() => {
-    console.log('from the page');
-    refetch();
-  }, [refetch]);
+  const { data, refetch } = useApi('https://api.quotable.io/quotes/random');
 
   return (
     <div
