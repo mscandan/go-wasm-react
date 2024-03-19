@@ -1,7 +1,7 @@
-import useApi from './hooks/useApi';
+import { useWebsocket } from './hooks/useWebsocket';
 
 export function App() {
-  const { data, refetch } = useApi('https://api.quotable.io/quotes/random');
+  const { messages } = useWebsocket();
 
   return (
     <div
@@ -14,8 +14,9 @@ export function App() {
         flexDirection: 'column',
       }}
     >
-      <button onClick={refetch}>Click here to invoke WebAssembly!</button>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      {messages.map((el, idx) => (
+        <span key={`${idx}-message`}>{el}</span>
+      ))}
     </div>
   );
 }
