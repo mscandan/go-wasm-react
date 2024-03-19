@@ -10,7 +10,10 @@ export const useWebsocket = () => {
         setMessages((curr) => [...curr, msg]);
       };
 
-      window.connectToWebsocket('ws://localhost:8080/ws', onMessageReceive);
+      window.connectToWebsocket('ws://localhost:8080/ws');
+
+      window.listenForMessages(onMessageReceive);
+      window.sendMessage('lmao');
     } catch (err) {
       console.error(err);
     }
