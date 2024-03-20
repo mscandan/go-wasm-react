@@ -5,12 +5,16 @@ export const useWebsocket = () => {
 
   const connectToSocket = useCallback(async () => {
     try {
+      document.cookie = 'username=John Doe';
       const onMessageReceive = (msg: string) => {
         console.log('msg received', msg);
         setMessages((curr) => [...curr, msg]);
       };
       console.log('we are here now starting connection', new Date());
-      await window.connectToWebsocketV2('ws://localhost:8080/ws');
+      await window.connectToWebsocketV2('ws://localhost:8080/ws', [
+        'hi',
+        'bro',
+      ]);
       console.log('we are here now connection started', new Date());
 
       window.listenForMessagesV2(onMessageReceive);

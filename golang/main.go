@@ -53,13 +53,23 @@ func connectToWebsocket() js.Func {
 func connectToWebSocketV2() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		connectionString := args[0].String()
+		subprotocols := args[1]
+
+		formattedSubProtocols := make([]string, 0)
+		for i := 0; i < subprotocols.Length(); i++ {
+			formattedSubProtocols = append(formattedSubProtocols, subprotocols.Index(i).String())
+		}
 
 		promisify := js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 			resolve := args[0]
 			reject := args[1]
 
+			opts := websocket.DialOptions{
+				Subprotocols: formattedSubProtocols,
+			}
+
 			go func() {
-				conn, _, err := websocket.Dial(context.Background(), connectionString, nil)
+				conn, _, err := websocket.Dial(context.Background(), connectionString, &opts)
 
 				if err != nil {
 					fmt.Printf("Couldn't connect to %s", connectionString)

@@ -6,7 +6,10 @@ declare global {
     sendMessage: (msg: string) => void;
     listenForMessages: (onMessageReceive: (msg: string) => void) => void;
 
-    connectToWebsocketV2: (url: string) => Promise<void>;
+    connectToWebsocketV2: (
+      url: string,
+      subprotocols: Array<string>
+    ) => Promise<void>;
     sendMessageV2: (msg: string) => void;
     listenForMessagesV2: (onMessageReceive: (msg: string) => void) => void;
   }
