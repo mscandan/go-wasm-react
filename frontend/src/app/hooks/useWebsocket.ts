@@ -5,17 +5,18 @@ export const useWebsocket = () => {
 
   const connectToSocket = useCallback(async () => {
     try {
-      document.cookie = 'username=John Doe';
       const onMessageReceive = (msg: string) => {
         console.log('msg received', msg);
         setMessages((curr) => [...curr, msg]);
       };
-      console.log('we are here now starting connection', new Date());
-      await window.connectToWebsocketV2('ws://localhost:8080/ws', [
-        'hi',
-        'bro',
-      ]);
-      console.log('we are here now connection started', new Date());
+      await fetch('https://simple-socket-golang.onrender.com/setCookies', {
+        credentials: 'include',
+      });
+
+      await window.connectToWebsocketV2(
+        'wss://simple-socket-golang.onrender.com/ws',
+        ['hi', 'bro']
+      );
 
       window.listenForMessagesV2(onMessageReceive);
       window.sendMessageV2(JSON.stringify({ start: 10, end: 20 }));

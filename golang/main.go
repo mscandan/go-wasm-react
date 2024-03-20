@@ -100,6 +100,7 @@ func listenForMessagesV2() js.Func {
 
 				if err != nil {
 					fmt.Printf("we have error while reading from socket err: %s", err.Error())
+					return
 				}
 
 				onMessageReceive.Invoke(string(payload))
