@@ -9,14 +9,11 @@ export const useWebsocket = () => {
         console.log('msg received', msg);
         setMessages((curr) => [...curr, msg]);
       };
-      await fetch('https://simple-socket-golang.onrender.com/setCookies', {
+      await fetch('http://localhost:80/setCookies', {
         credentials: 'include',
       });
 
-      await window.connectToWebsocketV2(
-        'wss://simple-socket-golang.onrender.com/ws',
-        ['hi', 'bro']
-      );
+      await window.connectToWebsocketV2('ws://localhost:80/ws', ['hi', 'bro']);
 
       window.listenForMessagesV2(onMessageReceive);
       window.sendMessageV2(JSON.stringify({ start: 10, end: 20 }));
